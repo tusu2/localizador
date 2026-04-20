@@ -8,7 +8,7 @@
 </head>
 <body>
     <header>
-        <nav>
+        <nav id="nav-menu">
             <ul>
                 <li><a href="#inicio">Inicio</a></li>
                 <li><a href="#acerca">Acerca de</a></li>
@@ -16,6 +16,11 @@
                 <li><a href="#contacto">Contacto</a></li>
             </ul>
         </nav>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Menú">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
     </header>
 
     <main>
@@ -81,4 +86,28 @@
         <p>&copy; 2026 Mi Página. Todos los derechos reservados.</p>
     </footer>
 </body>
+
+<script>
+        // Menú hamburguesa
+        const menuToggle = document.getElementById('menu-toggle');
+        const navMenu = document.getElementById('nav-menu');
+
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Cerrar menú al hacer clic en un enlace
+        document.querySelectorAll('#nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Cerrar menú al hacer clic fuera
+        document.addEventListener('click', (e) => {
+            if (!menuToggle.contains(e.target) && !navMenu.contains(e.target)) {
+                navMenu.classList.remove('active');
+            }
+        });
+    </script>
 </html>
