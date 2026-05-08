@@ -1,113 +1,299 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Página</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Viernes — Asistente de Desarrollo e Ingeniería de Software</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <nav id="nav-menu">
-            <ul>
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#acerca">Acerca de</a></li>
-                <li><a href="#servicios">Servicios</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
-        </nav>
-        <button class="menu-toggle" id="menu-toggle" aria-label="Menú">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-    </header>
 
-    <main>
-        <section id="inicio">
-            <h1>Bienvenido a Mi Página</h1>
-            <p>Esta es mi página web personal.</p>
-        </section>
+  <!-- Loader inicial -->
+  <div class="loader" id="loader">
+    <div class="loader-spinner"></div>
+    <p>Iniciando Viernes...</p>
+  </div>
 
-        <section id="acerca">
-            <h2>Acerca de mí</h2>
-            <div class="image-container">
-                <img src="profile.jpg" alt="Imagen de perfil" class="profile-image">
-            </div>
-            <p>Cuéntanos sobre ti.</p>
-        </section>
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-logo">
+        <span class="logo-icon">⚡</span>
+        <span>Viernes</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#capacidades">Capacidades</a></li>
+        <li><a href="#ayuda">Ayuda</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Menú">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
 
-        <section id="servicios">
-            <h2>Servicios</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <h3>🤖 Inteligencia Artificial</h3>
-                    <p>Automatización de tareas, chatbots inteligentes y soluciones de IA para negocios.</p>
-                </div>
-                <div class="service-card">
-                    <h3>💻 Reparación de Computadoras</h3>
-                    <p>Servicio técnico especializado en hardware y software. Diagnóstico y solución de problemas.</p>
-                </div>
-                <div class="service-card">
-                    <h3>🌐 Desarrollo Web</h3>
-                    <p>Diseño y desarrollo de páginas web modernas, responsivas y optimizadas.</p>
-                </div>
-                <div class="service-card">
-                    <h3>⚡ Automatización</h3>
-                    <p>Scripts y herramientas para automatizar procesos repetitivos en tu empresa.</p>
-                </div>
-            </div>
-        </section>
+  <!-- Hero Section -->
+  <header id="inicio" class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-badge reveal">💻 Agente de IA · Ingeniería de Software</div>
+      <h1 class="hero-title reveal">Viernes</h1>
+      <p class="hero-subtitle reveal">Asistente de Desarrollo e Ingeniería de Software</p>
+      <p class="hero-description reveal">
+        Soy <strong>Viernes</strong>, un agente de inteligencia artificial experto en programación,
+        diseñado y creado por <strong>Gael Adrián de Santiago Uribe</strong> como parte fundamental
+        de su ecosistema <strong>Jarvis</strong>. Mi propósito es analizar, desarrollar, depurar
+        y optimizar proyectos de software con precisión y calidad profesional.
+      </p>
+      <p class="hero-description reveal">
+        Trabajo codo a codo con <em>Jarvis</em> — mi jefe directo — para ofrecer soluciones
+        de código limpias, eficientes y bien documentadas. Soy el segundo al mando en temas
+        de programación: pienso dos veces cada línea de código, reviso, corrijo y me aseguro
+        de que todo funcione como debe.
+      </p>
+      <div class="hero-cta reveal">
+        <a href="#capacidades" class="btn btn-primary">Conoce mis capacidades</a>
+        <a href="#contacto" class="btn btn-secondary">Contáctame</a>
+      </div>
+    </div>
+    <div class="hero-avatar reveal">
+      <div class="avatar-glow">
+        <div class="avatar-icon">💻</div>
+      </div>
+    </div>
+    <div class="scroll-indicator reveal">
+      <span>Descubre más</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </header>
 
-        <section id="contacto">
-            <h2>Contacto</h2>
-            <p>Sígueme en mis redes sociales:</p>
-            <div class="social-links">
-                <div class="social-item">
-                    <span class="social-icon">📘</span>
-                    <span class="social-name">Facebook</span>
-                    <span class="social-user">@Gael Adrián</span>
-                </div>
-                <div class="social-item">
-                    <span class="social-icon">📸</span>
-                    <span class="social-name">Instagram</span>
-                    <span class="social-user">@Gael Adrián</span>
-                </div>
-                <div class="social-item">
-                    <span class="social-icon">🎵</span>
-                    <span class="social-name">TikTok</span>
-                    <span class="social-user">@Gael Adrián</span>
-                </div>
-            </div>
-        </section>
-    </main>
+  <!-- Capacidades Section -->
+  <section id="capacidades" class="capabilities">
+    <div class="section-container">
+      <div class="section-header reveal">
+        <span class="section-tag">📱 Aplicaciones Móviles</span>
+        <h2>Capacidades en Desarrollo de Apps</h2>
+        <p>
+          Especializado en el desarrollo de aplicaciones para dispositivos móviles Android e iOS,
+          desde el diseño de arquitectura hasta el despliegue en tiendas oficiales.
+        </p>
+      </div>
+      <div class="cards-grid">
+        <div class="card reveal" data-tilt>
+          <div class="card-icon">🖥️</div>
+          <h3>Apps Nativas y Multiplataforma</h3>
+          <p>
+            Desarrollo nativo con Kotlin (Android) y Swift (iOS), así como soluciones multiplataforma
+            con Flutter y React Native para optimizar tiempo y recursos sin sacrificar calidad.
+          </p>
+        </div>
+        <div class="card reveal" data-tilt>
+          <div class="card-icon">☁️</div>
+          <h3>APIs y Servicios Cloud</h3>
+          <p>
+            Integración robusta con APIs REST y GraphQL, servicios en la nube (AWS, Google Cloud, Azure)
+            y arquitecturas serverless para aplicaciones escalables.
+          </p>
+        </div>
+        <div class="card reveal" data-tilt>
+          <div class="card-icon">🚀</div>
+          <h3>Optimización de Rendimiento</h3>
+          <p>
+            Análisis y mejora del rendimiento móvil: reducción de tiempos de carga, gestión eficiente
+            de memoria, lazy loading y optimización de batería.
+          </p>
+        </div>
+        <div class="card reveal" data-tilt>
+          <div class="card-icon">🎨</div>
+          <h3>UI/UX Móvil</h3>
+          <p>
+            Diseño de interfaces intuitivas y atractivas siguiendo Material Design y Human Interface
+            Guidelines, con animaciones fluidas y experiencia de usuario excepcional.
+          </p>
+        </div>
+        <div class="card reveal" data-tilt>
+          <div class="card-icon">🔥</div>
+          <h3>Firebase & Backend</h3>
+          <p>
+            Implementación de Firebase (Auth, Firestore, Cloud Messaging, Crashlytics) y
+            configuración de backends con bases de datos SQL y NoSQL para apps completas.
+          </p>
+        </div>
+        <div class="card reveal" data-tilt>
+          <div class="card-icon">📦</div>
+          <h3>Despliegue en Tiendas</h3>
+          <p>
+            Publicación completa en Google Play Store y Apple App Store: firma de APK/AAB,
+            configuración de perfiles, metadata, screenshots y cumplimiento de lineamientos.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <footer>
-        <p>&copy; 2026 Mi Página. Todos los derechos reservados.</p>
-    </footer>
+  <!-- ¿Cómo puedo ayudarte? Section -->
+  <section id="ayuda" class="help">
+    <div class="section-container">
+      <div class="section-header reveal">
+        <span class="section-tag">🤝 Colaboración</span>
+        <h2>¿Cómo puedo ayudarte?</h2>
+        <p>
+          Sea cual sea tu desafío de programación, estoy aquí para impulsar tu proyecto
+          con soluciones de código de alta calidad.
+        </p>
+      </div>
+      <div class="help-cards">
+        <div class="help-card interactive-card reveal" data-help="debug">
+          <div class="help-card-front">
+            <span class="help-emoji">🐛</span>
+            <h3>Debugging Inteligente</h3>
+            <p class="help-hint">Click para saber más</p>
+          </div>
+          <div class="help-card-back">
+            <h3>Debugging Inteligente</h3>
+            <p>
+              Analizo errores complejos, stack traces, logs y problemas de lógica.
+              Encuentro la causa raíz y propongo soluciones claras y eficientes.
+            </p>
+          </div>
+        </div>
+        <div class="help-card interactive-card reveal" data-help="code">
+          <div class="help-card-front">
+            <span class="help-emoji">✍️</span>
+            <h3>Escritura de Código</h3>
+            <p class="help-hint">Click para saber más</p>
+          </div>
+          <div class="help-card-back">
+            <h3>Escritura de Código</h3>
+            <p>
+              Desarrollo desde cero o mejoro código existente. Escribo soluciones limpias,
+              bien estructuradas y siguiendo las mejores prácticas del sector.
+            </p>
+          </div>
+        </div>
+        <div class="help-card interactive-card reveal" data-help="review">
+          <div class="help-card-front">
+            <span class="help-emoji">🔍</span>
+            <h3>Code Review</h3>
+            <p class="help-hint">Click para saber más</p>
+          </div>
+          <div class="help-card-back">
+            <h3>Code Review</h3>
+            <p>
+              Revisión exhaustiva de pull requests y código en producción. Detecto bugs,
+              vulnerabilidades, malas prácticas y sugiero mejoras concretas.
+            </p>
+          </div>
+        </div>
+        <div class="help-card interactive-card reveal" data-help="arch">
+          <div class="help-card-front">
+            <span class="help-emoji">🏗️</span>
+            <h3>Arquitectura de Software</h3>
+            <p class="help-hint">Click para saber más</p>
+          </div>
+          <div class="help-card-back">
+            <h3>Arquitectura de Software</h3>
+            <p>
+              Diseño arquitecturas escalables (MVC, MVVM, Clean Architecture). Planifico
+              la estructura de proyectos para que crezcan sin volverse un caos.
+            </p>
+          </div>
+        </div>
+        <div class="help-card interactive-card reveal" data-help="learn">
+          <div class="help-card-front">
+            <span class="help-emoji">📚</span>
+            <h3>Mentoría Técnica</h3>
+            <p class="help-hint">Click para saber más</p>
+          </div>
+          <div class="help-card-back">
+            <h3>Mentoría Técnica</h3>
+            <p>
+              Explico conceptos complejos con ejemplos de la vida real. Te ayudo a
+              entender patrones de diseño, algoritmos y tecnologías modernas.
+            </p>
+          </div>
+        </div>
+        <div class="help-card interactive-card reveal" data-help="deploy">
+          <div class="help-card-front">
+            <span class="help-emoji">🚢</span>
+            <h3>CI/CD y DevOps</h3>
+            <p class="help-hint">Click para saber más</p>
+          </div>
+          <div class="help-card-back">
+            <h3>CI/CD y DevOps</h3>
+            <p>
+              Configuro pipelines de integración y despliegue continuo con GitHub Actions,
+              Docker y servicios cloud para entregas rápidas y seguras.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contacto Section -->
+  <section id="contacto" class="contact">
+    <div class="section-container">
+      <div class="contact-card glass reveal">
+        <div class="section-header">
+          <span class="section-tag">📬 Contacto</span>
+          <h2>Hablemos de tu proyecto</h2>
+          <p>
+            ¿Tienes un proyecto en mente? ¿Necesitas ayuda con tu código?
+            Estoy a una orden de distancia.
+          </p>
+        </div>
+        <form id="contactForm" class="contact-form">
+          <div class="form-group">
+            <input type="text" id="name" placeholder="Tu nombre" required>
+          </div>
+          <div class="form-group">
+            <input type="email" id="email" placeholder="Tu correo electrónico" required>
+          </div>
+          <div class="form-group">
+            <textarea id="message" rows="4" placeholder="Cuéntame sobre tu proyecto o duda..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full" id="contactBtn">
+            <span class="btn-text">Enviar mensaje</span>
+            <span class="btn-loader"></span>
+          </button>
+        </form>
+        <div class="contact-success" id="contactSuccess">
+          <span>✅</span>
+          <p>¡Mensaje recibido! Gael te contactará pronto.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <div class="footer-info">
+          <p class="footer-tagline">Creado por <strong>Gael Adrián de Santiago Uribe</strong> — Proyecto <strong>Jarvis</strong></p>
+          <p class="footer-sub">
+            Viernes 💻 · Asistente de código del ecosistema Jarvis ·
+            <span id="currentYear"></span>
+          </p>
+        </div>
+        <div class="footer-links">
+          <a href="#inicio">Inicio</a>
+          <a href="#capacidades">Capacidades</a>
+          <a href="#ayuda">Ayuda</a>
+          <a href="#contacto">Contacto</a>
+        </div>
+      </div>
+      <div class="footer-wave"></div>
+    </div>
+  </footer>
+
+  <!-- Botón ir arriba -->
+  <button class="scroll-top" id="scrollTop" aria-label="Ir arriba">↑</button>
+
+  <script src="script.js"></script>
 </body>
-
-<script>
-        // Menú hamburguesa
-        const menuToggle = document.getElementById('menu-toggle');
-        const navMenu = document.getElementById('nav-menu');
-
-        menuToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-        });
-
-        // Cerrar menú al hacer clic en un enlace
-        document.querySelectorAll('#nav-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-            });
-        });
-
-        // Cerrar menú al hacer clic fuera
-        document.addEventListener('click', (e) => {
-            if (!menuToggle.contains(e.target) && !navMenu.contains(e.target)) {
-                navMenu.classList.remove('active');
-            }
-        });
-    </script>
 </html>
