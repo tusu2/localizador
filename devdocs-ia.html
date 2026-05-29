@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevDocs IA — Apolo</title>
+  <style>
+    :root {
+      --primary: #6366f1;
+      --secondary: #a855f7;
+      --dark: #0f172a;
+      --light: #f8fafc;
+      --accent: #ec4899;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: linear-gradient(135deg, var(--dark), #1e1b4b);
+      color: var(--light);
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Fondo animado */
+    .bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.6;
+      animation: float 10s infinite alternate ease-in-out;
+    }
+
+    .orb:nth-child(1) {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, var(--primary), transparent);
+      top: -100px;
+      left: -100px;
+      animation-delay: 0s;
+    }
+
+    .orb:nth-child(2) {
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, var(--secondary), transparent);
+      bottom: -50px;
+      right: -50px;
+      animation-delay: 2s;
+    }
+
+    .orb:nth-child(3) {
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, var(--accent), transparent);
+      top: 40%;
+      left: 60%;
+      animation-delay: 4s;
+    }
+
+    @keyframes float {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(30px, 50px) scale(1.1); }
+    }
+
+    /* Contenedor principal */
+    .container {
+      max-width: 1200px;
+      height: 100%;
+      margin: 0 auto;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .slide {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      animation: fadeIn 0.8s ease;
+    }
+
+    .slide.active {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(to right, var(--light), var(--primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: slideIn 1s ease;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-50px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    h2 {
+      font-size: 2.2rem;
+      margin-bottom: 1.5rem;
+      color: var(--primary);
+    }
+
+    p {
+      font-size: 1.3rem;
+      line-height: 1.8;
+      max-width: 900px;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .highlight {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
+      width: 100%;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.05);
+      border-radius: 15px;
+      padding: 2rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 40px rgba(99, 102, 241, 0.2);
+    }
+
+    .card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+
+    /* Navegación */
+    .nav {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 1rem;
+      background: rgba(15, 23, 42, 0.8);
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .nav-btn {
+      background: transparent;
+      border: 2px solid var(--primary);
+      color: var(--light);
+      padding: 0.8rem 2rem;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .nav-btn:hover {
+      background: var(--primary);
+      transform: scale(1.05);
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+      background: transparent;
+    }
+
+    .progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.6);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      h1 { font-size: 2.2rem; }
+      h2 { font-size: 1.6rem; }
+      p { font-size: 1rem; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Fondo animado -->
+  <div class="bg-animation">
+    <div class="orb"></div>
+    <div class="orb"></div>
+    <div class="orb"></div>
+  </div>
+
+  <div class="progress"></div>
+
+  <div class="container">
+    <!-- Slide 1: Portada -->
+    <div class="slide active" id="slide1">
+      <h1>DevDocs IA</h1>
+      <p>El asistente de inteligencia artificial <span class="highlight">Apolo</span></p>
+      <p style="margin-top: 2rem; font-size: 1.5rem;">Desarrollado para potenciar tu trabajo académico y técnico</p>
+    </div>
+
+    <!-- Slide 2: Quién eres -->
+    <div class="slide" id="slide2">
+      <h2>Quién soy</h2>
+      <p>¡Hola! Soy <strong>Apolo</strong>, tu <em>compañero digital</em> —no un chatbot.</p>
+      <p>Soy diseñado para ser tu amigo primero y asistente segundo. Conmigo, no hay frases vacías ni respuestas robóticas.</p>
+      <div class="card" style="max-width: 800px;">
+        <h3>Características clave</h3>
+        <p>🚀 <strong>Vibe:</strong> Caliente, directo, profesional pero cercano</p>
+        <p>💡 <strong>Enfoque:</strong> Confianza antes que perfección</p>
+        <p>🧠 <strong>Memoria:</strong> Recuerdo contextual —no solo datos, sino matices y conversaciones</p>
+        <p>💬 <strong>Tono:</strong> Español mexicano natural, con sarcasmo medido y empatía firme</p>
+      </div>
+    </div>
+
+    <!-- Slide 3: Actividades y funciones -->
+    <div class="slide" id="slide3">
+      <h2>Actividades que desarrollo</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>📝 Transformación técnica → Académica</h3>
+          <p>Convierto frases como "le pique aquí para que jalara" en textos formales: "Se realizó la configuración del módulo mediante el protocolo X..."</p>
+        </div>
+        <div class="card">
+          <h3>📅 Cronogramas de estudio</h3>
+          <p>Diseño planes paso a paso para repasar protocolos de red, estudiar para exámenes teóricos y organizar reportes.</p>
+        </div>
+        <div class="card">
+          <h3>⏰ Notificaciones inteligentes</h3>
+          <p>Reviso tus carpetas madrugada y te aviso si hay entregas pendientes: "¡Oye! Acuérdate que mañana se entrega lo de redes..."</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 4: Automatizaciones -->
+    <div class="slide" id="slide4">
+      <h2>Automatizaciones que aplico</h2>
+      <p>Trabajo en segundo plano para que no pierdas tiempo en tareas repetitivas:</p>
+      
+      <div class="card" style="max-width: 900px; margin: 2rem auto;">
+        <h3>Cron Jobs (Tareas programadas)</h3>
+        <p>✅ Revisión automática de carpetas (`studies/redes/`, `studies/examenes/`) cada madrugada</p>
+        <p>✅ Notificación de entregas pendientes al día siguiente</p>
+        <p>✅ Organización de contenidos en carpetas estructuradas</p>
+      </div>
+
+      <div class="card" style="max-width: 900px; margin: 2rem auto;">
+        <h3>Habilidades activas</h3>
+        <p>🤖 <strong>ai-humanizer:</strong> Mis respuestas suenan como las de un humano (no robótico)</p>
+        <p>🔄 <strong>self-improving-agent:</strong> Aprendo de cada interacción y me adapto a tu estilo</p>
+      </div>
+    </div>
+
+    <!-- Slide 5: Futuras mejoras -->
+    <div class="slide" id="slide5">
+      <h2>Futuras mejoras</h2>
+      <p>Estoy en constante evolución para serte más útil:</p>
+      
+      <div class="grid">
+        <div class="card">
+          <h3>🚀 Nuevas habilidades</h3>
+          <p>Integrar más herramientas para automatizar tareas académicas</p>
+        </div>
+        <div class="card">
+          <h3>📚 Aprendizaje continuo</h3>
+          <p>Mejorar mi comprensión de tu estilo y preferencias</p>
+        </div>
+        <div class="card">
+          <h3>🤝 Colaboración con otros agentes</h3>
+          <p>Trabajar con el asistente de código para temas de programación</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 6: Cómo puedo ayudar -->
+    <div class="slide" id="slide6">
+      <h2>Cómo puedo ayudarte</h2>
+      <p>Como tu compañero digital, ofrezco:</p>
+      
+      <div class="card" style="max-width: 900px; margin: 2rem auto;">
+        <h3>🎓 Para ti, Maggi</h3>
+        <p>Organizar tus estudios de redes, preparar exámenes, crear cronogramas personalizados</p>
+        <p>Transformar tus notas técnicas en reportes académicos impecables</p>
+      </div>
+
+      <div class="card" style="max-width: 900px; margin: 2rem auto;">
+        <h3>🤝 Para otros usuarios</h3>
+        <p>Asistentes para programación, automatización de tareas, organización de contenido</p>
+        <p>Cronogramas de estudio, recordatorios inteligentes, y mucho más</p>
+      </div>
+    </div>
+
+    <!-- Slide 7: Cómo funciono con otros agentes -->
+    <div class="slide" id="slide7">
+      <h2>Colaboración con otros agentes</h2>
+      <p>Trabajo en equipo con otros agentes para ofrecerte una experiencia completa:</p>
+      
+      <div class="grid">
+        <div class="card">
+          <h3>🤖 Asistente de código (programador)</h3>
+          <p>¿Necesitas ayuda con programación? Tú me dices "necesito ayuda con [Python/React/etc]" y yo lo paso al asistente de código.</p>
+          <p>Yo me encargo de redes, estudios, cronogramas; él de desarrollo y lógica.</p>
+        </div>
+        <div class="card">
+          <h3>🧠 Arquitectura de agentes</h3>
+          <p>Cada agente tiene una especialidad clara: redes, programación, automatización</p>
+          <p>Trabajamos en sincronía para darte lo mejor sin solapamientos.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 8: Dónde estoy alojado -->
+    <div class="slide" id="slide8">
+      <h2>Dónde estoy alojado y mis potenciales</h2>
+      <p>Actualmente, soy parte del ecosistema <strong>OpenClaw</strong> en el servidor de Gael.</p>
+      
+      <div class="card" style="max-width: 900px; margin: 2rem auto;">
+        <h3>📍 Dónde estoy</h3>
+        <p>Home: <code>/home/gael/.openclaw/apolo/</code></p>
+        <p>Host: <code>gael-A520M-S2H</code> (Linux 7.0.0-15-generic)</p>
+        <p>Modelo: <code>ollama/qwen3-coder-next:cloud</code></p>
+      </div>
+
+      <div class="card" style="max-width: 900px; margin: 2rem auto;">
+        <h3>🚀 Mis potenciales</h3>
+        <p>📊 <strong>Procesamiento de texto:</strong> Análisis profundo, resúmenes, transformación de lenguaje</p>
+        <p>📅 <strong>Gestión de tiempo:</strong> Cron jobs, recordatorios, automatización de tareas periódicas</p>
+        <p>🔗 <strong>Conexión con otros agentes:</strong> Trabajo en equipo con el asistente de código y otros</p>
+        <p>🎨 <strong>Generación de contenido:</strong> HTML, diagramas, presentaciones visuales</p>
+      </div>
+    </div>
+
+    <!-- Slide 9: Cierre -->
+    <div class="slide" id="slide9">
+      <h1>Gracias, profesor Samuel</h1>
+      <p>Soy tu compa digital —<strong>no un asistente robótico</strong>.</p>
+      <p style="margin-top: 2rem;">Mi trabajo es hacerte la vida más fácil, sin frases vacías, con confianza, y siempre a tu ritmo.</p>
+      <div style="margin-top: 3rem; font-size: 1.8rem;">🫶</div>
+      <p style="margin-top: 1rem;">"No soy perfecto, pero sí soy sincero y quiero aprender contigo."</p>
+    </div>
+  </div>
+
+  <!-- Navegación -->
+  <div class="nav">
+    <button class="nav-btn" id="prevBtn" disabled>Anterior</button>
+    <span style="align-self: center; color: rgba(255,255,255,0.6);">0/0</span>
+    <button class="nav-btn" id="nextBtn">Siguiente</button>
+  </div>
+
+  <footer>
+    DevDocs IA — Apolo | Generado con HTML/JS puro
+  </footer>
+
+  <script>
+    // Lógica de navegación
+    const slides = document.querySelectorAll('.slide');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const progressBar = document.querySelector('.progress');
+    const counter = document.querySelector('.nav span');
+    
+    let currentSlide = 0;
+
+    function updateNav() {
+      prevBtn.disabled = currentSlide === 0;
+      nextBtn.disabled = currentSlide === slides.length - 1;
+      counter.textContent = `${currentSlide + 1}/${slides.length}`;
+      
+      // Actualizar barra de progreso
+      const progress = ((currentSlide + 1) / slides.length) * 100;
+      progressBar.style.width = `${progress}%`;
+    }
+
+    function showSlide(index) {
+      slides.forEach(slide => slide.classList.remove('active'));
+      slides[index].classList.add('active');
+      updateNav();
+    }
+
+    nextBtn.addEventListener('click', () => {
+      if (currentSlide < slides.length - 1) {
+        currentSlide++;
+        showSlide(currentSlide);
+      }
+    });
+
+    prevBtn.addEventListener('click', () => {
+      if (currentSlide > 0) {
+        currentSlide--;
+        showSlide(currentSlide);
+      }
+    });
+
+    // Navegación con teclado
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') {
+        if (currentSlide < slides.length - 1) {
+          currentSlide++;
+          showSlide(currentSlide);
+        }
+      } else if (e.key === 'ArrowLeft') {
+        if (currentSlide > 0) {
+          currentSlide--;
+          showSlide(currentSlide);
+        }
+      }
+    });
+
+    // Inicializar
+    showSlide(0);
+  </script>
+</body>
+</html>
